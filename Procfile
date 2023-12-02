@@ -1,1 +1,1 @@
-web gunicorn slick_app.wsgi:application --log-file -
+web gunicorn slickts.wsgi:application --log-file -
