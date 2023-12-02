@@ -1,0 +1,293 @@
+{%extends 'jobs/base.html'%}
+{%load crispy_forms_tags%}
+  {%block head%}Jobs{%endblock%}
+
+<body>
+{%block content%}
+{%if request.user.is_authenticated%}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <img src="/static/assets/img/SLICK-TS LOGO FOR PYTHON.png" alt="" class="img-fluid">
+        <h3 class="text-center text-light">Welcome {{request.user.username|capfirst}}</h3>
+        <h1 class="text-light"><a href="index.html"></a></h1>
+        <div class="social-links mt-3 text-center">
+           <a href="https://facebook.com/slickts" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="https://instagram.com/slicktshirts" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="https://maps.app.goo.gl/JXEzx77qv7nGNHN18" class="google-plus"><i class="bx bxl-google"></i></a>
+        </div>
+      </div>
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="{%url 'index'%}" class="nav-link active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+           <li><a href="{%url 'work'%}" class="nav-link"><i class="bx bx-add-to-queue"></i> <span>Add New Jobs</span></a></li>
+        <li><a href="{%url 'view_jobs'%}" class="nav-link"><i class="bx bx-server"></i> <span>Jobs</span></a></li>
+          <li><a href="{%url 'logout'%}" class="nav-link"><i class="bx bx-log-out-circle"></i> <span>Logout</span></a></li>
+
+
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+
+<div class="row">
+  <div class="col-md-8 offset-md-3">
+    <section class="d-flex flex-column justify-content-center align-items-center">
+
+
+       <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800"><b>Dashboard</b></h1>
+                    </div>
+                    <div class="d-sm-flex align-items-center justify-content-end mb-4">
+                        <a href="{%url 'work'%}" class="btn btn-sm btn-danger">Add New Job</a>
+
+
+
+                        <a href="{%url 'close_record'%}" class="btn btn-sm btn-danger mx-2">Close Records</a>
+                    </div>
+
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <!-- Earnings (Monthly) Card Example -->
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Total Jobs Done</div>
+                                            <div class="h5 mb-0 font-weight-bold text-danger-800">{{count}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-calculator text-danger" viewBox="0 0 16 16">
+                                          <path d="M12 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+                                          <path d="M4 2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3-6a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm0 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
+                                        </svg>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Earnings (Monthly) Card Example -->
+
+                        <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Total Amount Calculated</div>
+                                            <div class="h5 mb-0 font-weight-bold text-danger-800">₦{{cost}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-cash-coin text-danger" viewBox="0 0 16 16">
+                                          <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8m5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0"/>
+                                          <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V8.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1h-.003zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195l.054.012z"/>
+                                          <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083c.058-.344.145-.678.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1z"/>
+                                          <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 5.982 5.982 0 0 1 3.13-1.567z"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                           <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Total Width - FLEX</div>
+                                            <div class="h5 mb-0 font-weight-bold text-success-800">{{total_width_flex}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-rulers text-danger" viewBox="0 0 16 16">
+                                              <path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H4v-1h2v-1H2v-1h4V9H4V8h2V7H2V6h4V2h1v4h1V4h1v2h1V2h1v4h1V4h1v2h1V2h1v4h1V1a1 1 0 0 0-1-1z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                           <div class="col-xl-3 col-md-6 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                Total Width - SAV</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{total_width_sav}}</div>
+                                        </div>
+                                        <div class="col-auto">
+                                           <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-rulers text-danger" viewBox="0 0 16 16">
+                                              <path d="M1 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h5v-1H2v-1h4v-1H4v-1h2v-1H2v-1h4V9H4V8h2V7H2V6h4V2h1v4h1V4h1v2h1V2h1v4h1V4h1v2h1V2h1v4h1V1a1 1 0 0 0-1-1z"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+      <div class="col-md-11 offset-md-1">
+      <h1 class="text-center">Monthly Visualization For SAV</h1>
+<div>
+  <canvas id="myChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [{%for row in trun%}'{{row.minutes}}',{%endfor%}],
+      datasets: [{
+        label: 'Total Width For SAV',
+        data: [{%for row in trun%}'{{row.c}}',{%endfor%}],
+        backgroundColor: ['orange', 'black', 'red', 'green', 'blue', 'gold','navy','pink','brown','purple','yellow','fuchsia'],
+        borderColor: ['red', 'blue', 'fuchsia', 'green', 'navy', 'black'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+
+</script>
+
+<h1 class="text-center my-5">Monthly Visualization For FLEX BANNER</h1>
+<canvas id="myChart1"></canvas>
+
+<script>
+
+    const ctx1 = document.getElementById('myChart1');
+
+  new Chart(ctx1, {
+    type: 'bar',
+    data: {
+      labels: [{%for rows in flex%}'{{rows.minutes}}',{%endfor%}],
+      datasets: [{
+        label: 'Total Width For FLEX',
+        data: [{%for rows in flex%}'{{rows.f}}',{%endfor%}],
+        backgroundColor: ['orange', 'black', 'red', 'green', 'blue', 'gold','navy','pink','brown','purple','yellow','fuchsia'],
+        borderColor: ['red', 'blue', 'fuchsia', 'green', 'navy', 'black'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+
+</script>
+
+<h1 class="text-center my-5">Monthly Visualization For Cost</h1>
+<canvas id="myChart2"></canvas>
+
+<script>
+
+    const ctx2 = document.getElementById('myChart2');
+
+  new Chart(ctx2, {
+    type: 'doughnut',
+    data: {
+      labels: [{%for rows in money%}'{{rows.minutes}}',{%endfor%}],
+      datasets: [{
+        label: 'Total Monthly Amount',
+        data: [{%for rows in money%} '{{rows.mon}}',{%endfor%}],
+        backgroundColor: ['orange', 'black', 'red', 'green', 'blue', 'gold','navy','pink','brown','purple','yellow','fuchsia'],
+        borderColor: ['red', 'blue', 'fuchsia', 'green', 'navy', 'black'],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+
+
+</script>
+
+    </div>
+  </section>
+  </div>
+</div>
+{%else%}
+<h4 class="alert alert-danger my-3 mx-3">You have to login to access this page - <a href="{%url 'login'%}">Login</a></h4>
+{%endif%}
+{%endblock%}
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>SLICK-TS LTD</span></strong>
+
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
+        Designed by <a href="">Arthur Nwolisa</a>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/static/assets/vendor/aos/aos.js"></script>
+  <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/static/assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="/static/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="/static/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/static/assets/js/main.js"></script>
+
+</body>
+
+</html>
+
+

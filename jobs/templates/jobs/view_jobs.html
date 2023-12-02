@@ -1,0 +1,168 @@
+{%extends 'jobs/base.html'%}
+{%load crispy_forms_tags%}
+  {%block head%}Jobs Done{%endblock%}
+
+<body>
+{%block content%}
+{%if request.user.is_authenticated%}
+  <!-- ======= Mobile nav toggle button ======= -->
+  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+    <div class="d-flex flex-column">
+
+      <div class="profile">
+        <img src="/static/assets/img/SLICK-TS LOGO FOR PYTHON.png" alt="" class="img-fluid">
+        <h3 class="text-center text-light">Welcome {{request.user.username|capfirst}}</h3>
+        <h1 class="text-light"><a href="index.html"></a></h1>
+        <div class="social-links mt-3 text-center">
+           <a href="https://facebook.com/slickts" class="facebook"><i class="bx bxl-facebook"></i></a>
+          <a href="https://instagram.com/slicktshirts" class="instagram"><i class="bx bxl-instagram"></i></a>
+          <a href="https://maps.app.goo.gl/JXEzx77qv7nGNHN18" class="google-plus"><i class="bx bxl-google"></i></a>
+        </div>
+      </div>
+
+      <nav id="navbar" class="nav-menu navbar">
+        <ul>
+          <li><a href="{%url 'index'%}" class="nav-link active"><i class="bx bx-home"></i> <span>Home</span></a></li>
+         <li><a href="{%url 'work'%}" class="nav-link"><i class="bx bx-add-to-queue"></i> <span>Add Jobs</span></a></li>
+         <li><a href="{%url 'graph'%}" class="nav-link"><i class="bx bx-line-chart"></i> <span>Data Analysis</span></a></li>
+         <li><a href="{%url 'logout'%}" class="nav-link"><i class="bx bx-log-out-circle"></i> <span>Logout</span></a></li>
+
+        </ul>
+      </nav><!-- .nav-menu -->
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+<div class="row">
+  <div class="col-md-8 offset-md-3">
+    <section class="d-flex flex-column justify-content-center align-items-center">
+
+      <div class="col-md-12 offset-md-1">
+      <h1 class="text-center">Jobs</h1>
+      {%include 'jobs/messages.html'%}
+
+          <table class="table table-warning table-striped shadow">
+
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Customer's Name</th>
+      <th scope="col">Print</th>
+      <th scope="col">Height</th>
+      <th scope="col">Width</th>
+      <th scope="col">Cost</th>
+      <th scope="col">Date Posted</th>
+    </tr>
+  </thead>
+  <tbody>
+
+  {%for row in print1%}
+    <tr>
+      <th scope="row">{{row.id}}</th>
+      <td>{{row.customer_name}}</td>
+      <td>{{row.print}}</td>
+      <td>{{row.height}}</td>
+      <td>{{row.width}}</td>
+      <td>{{row.cost}}</td>
+      <td>{{row.date}}</td>
+    </tr>
+
+  {%endfor%}
+
+  </tbody>
+
+
+   <div class="badge bg-danger text-wrap shadow" style="width: 9rem;">
+  <a href="{%url 'graph'%}" class="text-light">
+    <span>View Graph</span><i class="bx bx-line-chart"></i></a>
+</div>
+<div class="badge bg-danger text-wrap shadow mx-2" style="width: 9rem;">
+   <a href="{%url 'work'%}" class="text-light">Add New Jobs <i class="bx bx-add-to-queue"></i></a>
+
+</div>
+
+    <div class="badge bg-danger text-wrap shadow mx-2" style="width: 9rem;">
+   <a href="{%url 'close_record'%}" class="text-light">Close Records <i class="bx bx-file"></i></a>
+
+</div>
+  <div class="badge bg-danger text-wrap shadow mx-2" style="width: 9rem;">
+   <a href="{%url 'download_file'%}" class="text-light">Download Report <i class="bx bx-file"></i></a>
+
+</div>
+
+</table>
+
+  <div class="badge bg-danger text-wrap shadow my-2" style="width: 9rem;">
+ Total Width SAV = <b>{{total_height}}</b>
+</div>
+ <div class="badge bg-danger text-wrap shadow my-2" style="width: 9rem;">
+ Total Width FLEX = <b>{{total_width_flex}}</b>
+</div>
+
+        <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+   {%for page in paginator.page_range%}
+    {%if page == print1.number%}
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">{{page}}</span>
+    </li>
+    {%else%}
+    <li class="page-item"><a class="page-link" href="?page={{page}}">{{page}}</a></li>
+    {%endif%}
+    {%endfor%}
+  </ul>
+</nav>
+      </div>
+
+
+    </div>
+  </section>
+
+  </div>
+</div>
+
+  {%else%}
+<h4 class="alert alert-danger my-3 mx-3">You have to login to access this page - <a href="{%url 'login'%}">Login</a></h4>
+{%endif%}
+{%endblock%}
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>SLICK-TS LTD</span></strong>
+
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
+        Designed by <a href="">Arthur Nwolisa</a>
+      </div>
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="/static/assets/vendor/aos/aos.js"></script>
+  <script src="/static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="/static/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="/static/assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="/static/assets/vendor/typed.js/typed.umd.js"></script>
+  <script src="/static/assets/vendor/waypoints/noframework.waypoints.js"></script>
+  <script src="/static/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/static/assets/js/main.js"></script>
+
+</body>
+
+</html>
+
+
