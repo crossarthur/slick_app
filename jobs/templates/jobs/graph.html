@@ -162,7 +162,7 @@
   new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: [{%for row in trun%}'{{row.minutes}}',{%endfor%}],
+      labels: [{%for row in trun%}'{{row.months}}',{%endfor%}],
       datasets: [{
         label: 'Total Width For SAV',
         data: [{%for row in trun%}'{{row.c}}',{%endfor%}],
@@ -193,7 +193,7 @@
   new Chart(ctx1, {
     type: 'bar',
     data: {
-      labels: [{%for rows in flex%}'{{rows.minutes}}',{%endfor%}],
+      labels: [{%for rows in flex%}'{{rows.months}}',{%endfor%}],
       datasets: [{
         label: 'Total Width For FLEX',
         data: [{%for rows in flex%}'{{rows.f}}',{%endfor%}],
@@ -224,7 +224,7 @@
   new Chart(ctx2, {
     type: 'doughnut',
     data: {
-      labels: [{%for rows in money%}'{{rows.minutes}}',{%endfor%}],
+      labels: [{%for rows in money%}'{{rows.months}}',{%endfor%}],
       datasets: [{
         label: 'Total Monthly Amount',
         data: [{%for rows in money%} '{{rows.mon}}',{%endfor%}],

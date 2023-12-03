@@ -15,7 +15,15 @@ from xhtml2pdf import pisa
 
 
 def index(request):
-    return render(request, 'jobs/index.html')
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your message has been sent. Thank you!')
+    else:
+        form = ContactForm()
+        messages.error(request, 'Your message was not sent.')
+    return render(request, 'jobs/index.html', {'form': form})
 
 
 def register(request):
@@ -48,8 +56,8 @@ def view_jobs(request):
     month = 9
     print1 = Jobs.objects.all().order_by('-date')
     prnts = Jobs.objects.filter(date__lte=datetime.datetime.today(), date__gt=datetime.datetime.today()-datetime.timedelta(days=4)).values('date').annotate(count=Count('id'))
-    trun = Jobs.objects.annotate(minutes=TruncMinute('date')).values('minutes',).annotate(c=Sum('width')).values('minutes', 'c', ).filter(print__name='SAV')
-    flex = Jobs.objects.annotate(minutes=TruncMinute('date')).values('minutes',).annotate(f=Sum('width')).values('minutes', 'f').filter(print__name='FLEX')
+    trun = Jobs.objects.annotate(month=TruncMonth('date')).values('month',).annotate(c=Sum('width')).values('month', 'c', ).filter(print__name='SAV')
+    flex = Jobs.objects.annotate(month=TruncMonth('date')).values('month',).annotate(f=Sum('width')).values('month', 'f').filter(print__name='FLEX')
 
     trt = Jobs.objects.filter(print__name='SAV').aggregate(cal=Sum('width'))
     sum_flex = Jobs.objects.filter(print__name='FLEX').aggregate(flex=Sum('width'))
@@ -81,9 +89,9 @@ def view_jobs(request):
 
 def graph(request):
     count = Jobs.objects.all().count()
-    trun = Jobs.objects.annotate(minutes=TruncMinute('date')).values('minutes',).annotate(c=Sum('width')).values('minutes', 'c', ).filter(print__name='SAV')
-    flex = Jobs.objects.annotate(minutes=TruncMinute('date')).values('minutes',).annotate(f=Sum('width')).values('minutes', 'f').filter(print__name='FLEX')
-    money = Jobs.objects.annotate(minutes=TruncMinute('date')).values('minutes',).annotate(mon=Sum('cost')).values('minutes', 'mon')
+    trun = Jobs.objects.annotate(months=TruncMonth('date')).values('months',).annotate(c=Sum('width')).values('months', 'c', ).filter(print__name='SAV')
+    flex = Jobs.objects.annotate(months=TruncMonth('date')).values('months',).annotate(f=Sum('width')).values('months', 'f').filter(print__name='FLEX')
+    money = Jobs.objects.annotate(months=TruncMonth('date')).values('months',).annotate(mon=Sum('cost')).values('months', 'mon')
     print(money)
     total_cost = Jobs.objects.aggregate(ct=Sum('cost'))
     cost = total_cost['ct']
@@ -155,3 +163,5 @@ def pdf(request, pk):
     if pisa_status.err:
         return HttpResponse('We had some errors <pre>' + html + '</pre>')
     return response
+
+

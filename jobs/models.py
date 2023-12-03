@@ -46,3 +46,13 @@ class CloseRecord(models.Model):
 
     def __str__(self):
         return self.name_record
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=40)
+    phone_number = models.PositiveIntegerField()
+    subject = models.CharField(max_length=50)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name

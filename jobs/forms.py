@@ -22,3 +22,9 @@ class CloseRecordForm(forms.ModelForm):
     class Meta:
         model = CloseRecord
         fields = ('name_record', 'total_jobs', 'total_sav', 'total_flex', 'total_cost')
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = "__all__"

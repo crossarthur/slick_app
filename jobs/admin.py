@@ -4,3 +4,4 @@ from.models import *
 
 admin.site.register(Jobs)
 admin.site.register(Prints)
+admin.site.register(Contact)
