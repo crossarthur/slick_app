@@ -37,10 +37,10 @@
 
   <!-- ======= Hero Section ======= -->
 <div class="row">
-  <div class="col-sm offset-sm">
+
     <section class="d-flex flex-column justify-content-center align-items-center">
 
-      <div class="col-sm offset-sm-3">
+      <div class="col-md-9 offset-md-3">
       <h1 class="text-center">Jobs</h1>
       {%include 'jobs/messages.html'%}
 
@@ -67,7 +67,7 @@
       <td>{{row.height}}</td>
       <td>{{row.width}}</td>
       <td>{{row.cost}}</td>
-      <td>{{row.date}}</td>
+      <td>{{row.date|date:'d-m-Y'}}</td>
     </tr>
 
   {%endfor%}

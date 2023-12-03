@@ -36,11 +36,12 @@
   </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
+<div class="container">
 <div class="row">
-  <div class="col-sm offset-sm">
+
     <section class="d-flex flex-column justify-content-center align-items-center">
 
-      <div class="col-sm-6 offset-sm-3">
+      <div class="col-md-6 offset-md-3">
       <h1 class="text-center">Jobs</h1>
       {%include 'jobs/messages.html'%}
 
@@ -68,8 +69,9 @@
       <td>{{row.total_sav}}</td>
       <td>{{row.total_flex}}</td>
       <td>₦{{row.total_cost}}</td>
-      <td>{{row.close_account}}</td>
-      <td><a href="{%url 'pdf' row.id%}" class="btn btn-danger btn-sm">Download Report</a></td>
+      <td>{{row.close_account|date:'d-m-Y'}}</td>
+      <td><a href="{%url 'pdf' row.id%}" class="btn btn-danger btn-sm">Download</a>
+      </td>
     </tr>
 
   {%endfor%}
@@ -110,7 +112,7 @@
 
   </div>
 </div>
-
+</div>
   {%else%}
 <h4 class="alert alert-danger my-3 mx-3">You have to login to access this page - <a href="{%url 'login'%}">Login</a></h4>
 {%endif%}
