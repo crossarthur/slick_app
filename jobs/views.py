@@ -22,7 +22,7 @@ def index(request):
             messages.success(request, 'Your message has been sent. Thank you!')
     else:
         form = ContactForm()
-        messages.error(request, 'Your message was not sent.')
+        messages.success(request, 'Your message has been sent. Thank you!')
     return render(request, 'jobs/index.html', {'form': form})
 
 
