@@ -20,9 +20,10 @@ def index(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your message has been sent. Thank you!')
+            return redirect('index')
     else:
         form = ContactForm()
-        messages.error(request, 'Your message has not been sent.')
+
     return render(request, 'jobs/index.html', {'form': form})
 
 

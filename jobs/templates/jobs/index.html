@@ -47,6 +47,7 @@
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+    {%include 'jobs/messages.html'%}
     <div class="hero-container" data-aos="fade-in">
       <h1>We are Slick</h1>
       <p>We <span class="typed" data-typed-items="Print, Design, Create"></span></p>
@@ -190,7 +191,7 @@
           </div>
 
           <div class="col-lg-7 mt-5 mt-lg-0 d-flex justify-content-center">
-            <form action="{%url 'index'%}" method="post" role="form" class="php-email-form">
+            <form action="{%url 'index'%}" method="POST">
               <div class="row">
                 <h1 class="mb-4">Contact Us Today!</h1>
                 {%include 'jobs/messages.html'%}
@@ -199,12 +200,13 @@
 
                   {%csrf_token%}
                   {{form|crispy}}
-
-              <button type="submit">Send Message</button>
+              </div>
+              <button class="btn btn-danger" type="submit" value="submit">Send Message</button>
+                </div>
             </form>
           </div>
 
-        </div>
+
 
       </div>
     </section><!-- End Contact Section -->

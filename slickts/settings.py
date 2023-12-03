@@ -31,6 +31,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Access environment variables
+account_sid = os.getenv('account_sid')
+auth_token = os.getenv("auth_token")
+
+
 
 # Application definition
 
