@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from twilio.base.exceptions import TwilioException
 from twilio.rest import Client
 from dotenv import load_dotenv
 import os
@@ -62,16 +63,18 @@ class Contact(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        account_sid = os.getenv('account_sid')
-        auth_token = os.getenv("auth_token")
+        try:
+            account_sid = os.getenv('account_sid')
+            auth_token = os.getenv("auth_token")
 
-        client = Client(account_sid, auth_token)
+            client = Client(account_sid, auth_token)
 
-        message = client.messages.create(
-                     body=f"You have received a message from {self.name} in SlICK-TS App",
-                     from_='+16626671874',
-                     to='+2348033248599'
-                 )
+            message = client.messages.create(
+                         body=f"You have received a message from {self.name} in SlICK-TS App",
+                         from_='+16626671874',
+                         to='+2348033248599'
+                     )
 
-        print(message.sid)
-        return super().save(*args, **kwargs)
+            print(message.sid)
+        except TwilioException:
+            return super().save(*args, **kwargs)
