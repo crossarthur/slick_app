@@ -1,46 +1,44 @@
-{%extends 'jobs/base.html'%}
-{%load crispy_forms_tags%}
-  {%block head%}Jobs Done{%endblock%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>{%block head%}{%endblock%}</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/static/assets/img/SLICK-TS LOGO FOR PYTHON.png" rel="icon">
+  <link href="/static/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/static/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/static/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/static/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/static/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/static/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/static/assets/css/style.css" rel="stylesheet">
 
 <body>
-{%block content%}
+
 {%if request.user.is_authenticated%}
-  <!-- ======= Mobile nav toggle button ======= -->
-  <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
 
-  <!-- ======= Header ======= -->
-  <header id="header">
-    <div class="d-flex flex-column">
-
-      <div class="profile">
-        <img src="/static/assets/img/SLICK-TS LOGO FOR PYTHON.png" alt="" class="img-fluid">
-        <h3 class="text-center text-light">Welcome {{request.user.username|capfirst}}</h3>
-        <h1 class="text-light"><a href="index.html"></a></h1>
-        <div class="social-links mt-3 text-center">
-           <a href="https://facebook.com/slickts" class="facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="https://instagram.com/slicktshirts" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="https://maps.app.goo.gl/JXEzx77qv7nGNHN18" class="google-plus"><i class="bx bxl-google"></i></a>
-        </div>
-      </div>
-
-      <nav id="navbar" class="nav-menu navbar">
-        <ul>
-          <li><a href="{%url 'index'%}" class="nav-link active"><i class="bx bx-home"></i> <span>Home</span></a></li>
-         <li><a href="{%url 'work'%}" class="nav-link"><i class="bx bx-add-to-queue"></i> <span>Add Jobs</span></a></li>
-         <li><a href="{%url 'graph'%}" class="nav-link"><i class="bx bx-line-chart"></i> <span>Data Analysis</span></a></li>
-         <li><a href="{%url 'logout'%}" class="nav-link"><i class="bx bx-log-out-circle"></i> <span>Logout</span></a></li>
-
-        </ul>
-      </nav><!-- .nav-menu -->
-    </div>
-  </header><!-- End Header -->
 
   <!-- ======= Hero Section ======= -->
+<div class="container">
 <div class="row">
 
-    <section class="d-flex flex-column justify-content-center align-items-center">
 
-      <div class="col-md-9 offset-md-3">
+
+      <div class="col-10">
       <h1 class="text-center">Jobs</h1>
       {%include 'jobs/messages.html'%}
 
@@ -119,7 +117,7 @@
 
 
     </div>
-  </section>
+
 
   </div>
 </div>
@@ -127,25 +125,7 @@
   {%else%}
 <h4 class="alert alert-danger my-3 mx-3">You have to login to access this page - <a href="{%url 'login'%}">Login</a></h4>
 {%endif%}
-{%endblock%}
-  <!-- ======= Footer ======= -->
-  <footer id="footer">
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>SLICK-TS LTD</span></strong>
-
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/iportfolio-bootstrap-portfolio-websites-template/ -->
-        Designed by <a href="">Arthur Nwolisa</a>
-      </div>
-    </div>
-  </footer><!-- End  Footer -->
-
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+</div>
 
   <!-- Vendor JS Files -->
   <script src="/static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
