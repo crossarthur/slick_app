@@ -11,8 +11,10 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-# Create your views here.
 
+import time
+
+# Create your views here.
 
 def index(request):
     if request.method == 'POST':
@@ -23,7 +25,6 @@ def index(request):
             return redirect('index')
     else:
         form = ContactForm()
-
     return render(request, 'jobs/index.html', {'form': form})
 
 
