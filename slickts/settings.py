@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-m(m=mj1wk=&ms5z#3d!inwcq3gp_&wjus170bnk9gq07fm28ci
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 import os
 from dotenv import load_dotenv
@@ -97,6 +97,20 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+'''DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+
+    }
+
+}'''
 
 
 # Password validation
