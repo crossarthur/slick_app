@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'jobs',
     "crispy_forms",
     "crispy_bootstrap5",
-    'background_task',
 ]
 
 MIDDLEWARE = [
